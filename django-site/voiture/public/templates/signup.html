@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block page_title %}logout{% endblock page_title %}
+
+
+
+{% block document_container %}
+<h1>Creer une nouvelle voiture</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+{% endblock document_container %}
+
+
+
