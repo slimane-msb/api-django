@@ -18,9 +18,14 @@
                     <li><a href="{% url 'voiture' %}">VOITURE</a></li>
                     <li><a href="{% url 'cle' %}">CLE</a></li>
                     <li><a href="{% url 'garage' %}">GARAGE</a></li>
-                    <li><a href="{% url 'login' %}">LOGIN</a></li>
+
+                    {% if user.is_authenticated %}
                     <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+                    <li><a href="{% url 'profile' %}">{{ user.username }}</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}">LOGIN</a></li>
                     <li><a href="{% url 'signup' %}">SIGNUP</a></li>
+                    {% endif %}
                 </ul>
             </nav>
         </header>
@@ -28,7 +33,7 @@
         {% block document_body %}
             <div id=document-container>{% block document_container %}{% endblock document_container %}</div>
 
-            <footer id=document-footer>Footer</footer>
+            <footer id=document-footer>FIPA 2024</footer>
         {% endblock document_body %}
 
     </body>

@@ -5,12 +5,33 @@
 
 
 {% block document_container %}
-<h1>Creer une nouvelle voiture</h1>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-</form>
+
+
+<h1></h1>
+
+
+<div class="page">
+
+    <div class="login-container">
+        <h2>Signup</h2>
+
+        <form class="form-fields" method="POST">
+            {% csrf_token %}
+            {{ form.as_table }}
+            <button type="submit">Save</button>
+        </form>
+        
+        <div class="besoinCompte">
+            Vous avez deja un compte? <a href="{% url 'login' %}">Login</a>       
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
 {% endblock document_container %}
 
 
