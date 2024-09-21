@@ -1,5 +1,6 @@
-{% extends "base.html" %}
 
+{% extends "base.html" %}
+{% load static %}
 {% block page_title %}Profil{% endblock page_title %}
 
 
@@ -8,6 +9,10 @@
 
 
 {% block document_container %}
+
+<img src="{% static 'images/messi.jpg' %}" alt="My Image">
+
+
 <h1>Profil : {{ user.username }}</h1>
 <p> 
     Location: {{ profile.location }}
