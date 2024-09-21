@@ -66,3 +66,33 @@ class GarageSelectForm(forms.Form):
         queryset = Garage.objects.all(), 
         empty_label = "Select a Garage"
     )
+
+class GarageAddForm(forms.Form):
+    name = forms.CharField(
+        max_length = 200, 
+        label="", 
+        widget = forms.TextInput(attrs={
+            'placeholder': 'Entrer le nom'
+        })    
+    )
+
+
+class GarageEditForm(forms.Form):
+    garage = forms.ModelChoiceField(
+        queryset = Garage.objects.all(), 
+        empty_label = "Select a Garage"
+    )
+
+    name = forms.CharField(
+        max_length = 200, 
+        label="", 
+        widget = forms.TextInput(attrs={
+            'placeholder': 'Entrer le nom'
+        })    
+    )
+
+class GarageDeleteForm(forms.Form):
+    garage = forms.ModelChoiceField(
+        queryset = Garage.objects.all(), 
+        empty_label = "Select a Garage"
+    )

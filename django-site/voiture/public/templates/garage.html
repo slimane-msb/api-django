@@ -14,20 +14,24 @@
     <h1>garage</h1>
 
     
-    {% if garages %}
-        <table>
-            <tr>
-                <th>
-                    Liste Garages
-                </th>
-            </tr>
-            {% for garage in garages %}
-                <tr><td>{{ garage.nom }}</td></tr>
-            {% endfor %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form_add.as_p }}
+        <button type="submit" name="form_add">Submit</button>
+    </form>
 
-        </table>
+    <form method="post">
+        {% csrf_token %}
+        {{ form_edit.as_p }}
+        <button type="submit" name="form_edit">Submit</button>
+    </form>
 
-    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form_delete.as_p }}
+        <button type="submit" name="form_delete">Submit</button>
+    </form>
+   
     
     
 

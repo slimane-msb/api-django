@@ -3,11 +3,10 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 from django.http import HttpResponse
-from .forms import UserForm,GarageForm
+from .forms import GarageAddForm, GarageDeleteForm, GarageEditForm, UserForm,GarageForm
 from api.models import Garage,Profile
 from .forms import GarageSelectForm
 import requests
-from django.conf import settings
 
 
 
@@ -47,8 +46,31 @@ def signup(request):
 
 
 def garage(request):
-    garages = Garage.objects.all()
-    return render(request, "garage.html",{'garages': garages})
+    form_add = GarageAddForm(request.POST or None)
+    form_edit = GarageEditForm(request.POST or None)
+    form_delete = GarageDeleteForm(request.POST or None)
+
+    if request.method == 'POST':
+    
+        if form_add.is_valid() and "form_add" in request.POST:
+            data = {'nom': form_add.cleaned_data['name']}
+            url = request.build_absolute_uri('/api/garages/add/')
+            requests.post(url, json=data)
+    
+        elif form_edit.is_valid() and "form_edit" in request.POST:
+            data = {'nom': form_edit.cleaned_data['name']}
+            garage = form_edit.cleaned_data['garage']
+            url = request.build_absolute_uri(f'/api/garages/{garage.id}/edit/')
+            requests.put(url, json=data)
+
+        elif form_delete.is_valid() and "form_delete" in request.POST:
+            garage = form_delete.cleaned_data['garage']
+            url = request.build_absolute_uri(f'/api/garages/{garage.id}/delete/')
+            requests.delete(url)
+
+    forms = {'form_add': form_add, 'form_edit': form_edit, 'form_delete': form_delete}
+    return render(request, 'garage.html', forms)
+
 
 def voiture_list(request):
     voitures = []
