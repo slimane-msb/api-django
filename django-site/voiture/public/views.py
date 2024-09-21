@@ -3,23 +3,21 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 from django.http import HttpResponse
-from .forms import UserForm
+from .forms import UserForm,GarageForm
+from api.models import Garage
 
 @login_required
 def home(request):
     return render(request, "home.html")
 
-
 @login_required
-def profile(request):
-    return render(request, "profile.html")
+def profil(request):
+    return render(request, "profil.html")
 
 
 def cle(request):
     return render(request, "cle.html")
 
-def garage(request):
-    return render(request, "garage.html")
 
 def voiture(request):
     return render(request, "voiture.html")
@@ -39,5 +37,10 @@ def signup(request):
             return redirect('/')  
     else:
         form = UserForm()
-    
     return render(request, 'signup.html', {'form': form})
+
+
+def garage(request):
+    garages = Garage.objects.all()
+    return render(request, "garage.html",{'garages': garages})
+

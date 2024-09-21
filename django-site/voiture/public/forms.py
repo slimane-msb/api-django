@@ -1,5 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import AuthenticationForm,UsernameField
+from django.contrib.auth.views import LoginView
 
 
 class UserForm(forms.ModelForm):
@@ -30,13 +32,29 @@ class UserForm(forms.ModelForm):
 
 
 
-class LoginForm(forms.Form):
-    username = forms.CharField(
-        max_length=150, 
+class MyAuthenticationForm(AuthenticationForm):
+    username = UsernameField(
+        label = "",
         widget=forms.TextInput(attrs={
-            'placeholder': 'usss'
+            "autofocus": True,
+            'placeholder': 'Username'
         })
     )
-    password = forms.CharField(widget=forms.PasswordInput(attrs={
-        'placeholder': 'Password'
-    }))
+    password = forms.CharField(
+        label = "",
+        strip=False,
+        widget=forms.PasswordInput(attrs={
+            "autocomplete": "current-password",
+            'placeholder': 'Password'
+        }),
+    )
+
+
+class MyLoginView(LoginView):
+    form_class = MyAuthenticationForm
+
+
+
+class GarageForm(forms.ModelForm):
+    pass
+
