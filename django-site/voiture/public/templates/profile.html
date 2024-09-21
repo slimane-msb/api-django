@@ -9,26 +9,21 @@
 
 
 {% block document_container %}
+<div class="page">
 
-<!-- <img src="{% static 'images/messi.jpg' %}" alt="My Image"> -->
-
-
-<h1>Profil : {{ user.username }}</h1>
-<p> 
-    Location: {{ profile.location }}
-    user : {{ profile.user.username }}
-    profile.user : {{ user.username }}
-</p>
-
-    {% if profile.profile_picture %}
-        <p>picture</p>
-        <img src="/media/{{ profile.profile_picture }}" alt="Profile Picture">
-
-    {% else %}
-        <img src="/media/profile_pics/default.jpeg" alt="Profile Picture">
-    {% endif %}
-
-
-
-
+    <div class="profile-container">
+        {% if profile.profile_picture %}
+            <img src="/media/{{ profile.profile_picture }}"  alt="Profile Picture" class="profile-picture">
+        {% else %}
+            <img src="/media/profile_pics/default.jpeg"  alt="Profile Picture" class="profile-picture">
+        {% endif %}
+        <h1 class="name">{{ user.username }}</h1>
+        {% if user.email %}
+            <p class="email">{{ user.email }}</p>
+        {% endif %}
+        {% if profile.location  %}
+            <p class="email">{{ profile.location }}</p>
+        {% endif %}
+    </div>
+</div>
 {% endblock document_container %}
