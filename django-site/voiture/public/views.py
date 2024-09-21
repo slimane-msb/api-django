@@ -5,6 +5,11 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .forms import UserForm,GarageForm
 from api.models import Garage,Profile
+from .forms import GarageSelectForm
+import requests
+from django.conf import settings
+
+
 
 @login_required
 def home(request):
@@ -45,3 +50,14 @@ def garage(request):
     garages = Garage.objects.all()
     return render(request, "garage.html",{'garages': garages})
 
+def voiture_list(request):
+    voitures = []
+    form = GarageSelectForm(request.POST or None)
+
+    if request.method == 'POST' and form.is_valid():
+        garage = form.cleaned_data['garage']
+        url = request.build_absolute_uri(f'/api/voitures/{garage.id}/')
+        response = requests.get(url)
+        voitures = response.json()  
+        
+    return render(request, 'voiture.html', {'form': form, 'voitures': voitures})

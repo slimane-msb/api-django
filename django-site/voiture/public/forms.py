@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm,UsernameField
 from django.contrib.auth.views import LoginView
 
+from api.models import Garage
 
 class UserForm(forms.ModelForm):
     username = forms.CharField(
@@ -58,3 +59,10 @@ class MyLoginView(LoginView):
 class GarageForm(forms.ModelForm):
     pass
 
+
+
+class GarageSelectForm(forms.Form):
+    garage = forms.ModelChoiceField(
+        queryset = Garage.objects.all(), 
+        empty_label = "Select a Garage"
+    )
