@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
     {% load static %}
+
     <head>
         <title>{% block page_title %}{% endblock page_title %}</title>
         <link rel="stylesheet" type="text/css" href="{% static 'css/dark.css' %}">
@@ -20,8 +21,8 @@
                     <li><a href="{% url 'garage' %}">GARAGE</a></li>
 
                     {% if user.is_authenticated %}
+                    <li><a href="{% url 'profile' %}">PROFILE</a></li>
                     <li><a href="{% url 'logout' %}">LOGOUT</a></li>
-                    <li><a href="{% url 'profil' %}">{{ user.username }}</a></li>
                     {% else %}
                     <li><a href="{% url 'login' %}">LOGIN</a></li>
                     <li><a href="{% url 'signup' %}">SIGNUP</a></li>

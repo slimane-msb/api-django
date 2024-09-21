@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block page_title %}Profil{% endblock page_title %}
+
+
+
+
+
+
+{% block document_container %}
+<h1>Profil : {{ user.username }}</h1>
+<p> 
+    Location: {{ profile.location }}
+    user : {{ profile.user.username }}
+    profile.user : {{ user.username }}
+
+    {% if profile.profile_picture %}
+        <p>picture</p>
+        <img src="{{ user.profile_picture.url }}" alt="Profile Picture">
+        <img src="default.jpeg" alt="Profile Picture">
+
+    {% else %}
+        <img src="https://via.placeholder.com/150" alt="Profile Picture">
+    {% endif %}
+</p>
+
+{% endblock document_container %}

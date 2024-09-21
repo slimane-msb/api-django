@@ -4,15 +4,16 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 from django.http import HttpResponse
 from .forms import UserForm,GarageForm
-from api.models import Garage
+from api.models import Garage,Profile
 
 @login_required
 def home(request):
     return render(request, "home.html")
 
 @login_required
-def profil(request):
-    return render(request, "profil.html")
+def profile(request):
+    profile = request.user.profile
+    return render(request, "profile.html",{'profile': profile})
 
 
 def cle(request):
