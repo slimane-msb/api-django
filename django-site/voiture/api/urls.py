@@ -10,7 +10,10 @@ urlpatterns = [
     path('garages/<int:pk>/delete/', views.delete_garage, name='delete_garage'), 
 
     path('voitures/', views.get_voitures, name='get_voitures'),        
-    path('voitures/<int:garageId>/', views.get_voiture, name='get_voiture'),   
+    path('voitures/<int:garageId>/', views.get_voiture, name='get_voiture'), 
+    path('voitures/add/', views.add_voiture, name='add_garage'),       
+
+
 
 ]
 

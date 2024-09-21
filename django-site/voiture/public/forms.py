@@ -61,10 +61,48 @@ class GarageForm(forms.ModelForm):
 
 
 
-class GarageSelectForm(forms.Form):
+class VoitureSelectForm(forms.Form):
     garage = forms.ModelChoiceField(
         queryset = Garage.objects.all(), 
         empty_label = "Select a Garage"
+    )
+
+class VoitureAddForm(forms.Form):
+    garage = forms.ModelChoiceField(
+        queryset = Garage.objects.all(), 
+        empty_label = "Select a Garage"
+    )
+
+    couleur = forms.CharField(
+        max_length = 200, 
+        label="", 
+        widget = forms.TextInput(attrs={
+            'placeholder': 'Entrer le nom'
+        })    
+    )
+
+    immatriculation = forms.CharField(
+        max_length = 200, 
+        label="", 
+        widget = forms.TextInput(attrs={
+            'placeholder': 'Entrer le nom'
+        })    
+    )
+
+    marque = forms.CharField(
+        max_length = 200, 
+        label="", 
+        widget = forms.TextInput(attrs={
+            'placeholder': 'Entrer le nom'
+        })    
+    )
+
+    modele = forms.CharField(
+        max_length = 200, 
+        label="", 
+        widget = forms.TextInput(attrs={
+            'placeholder': 'Entrer le nom'
+        })    
     )
 
 class GarageAddForm(forms.Form):

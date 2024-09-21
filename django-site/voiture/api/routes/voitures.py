@@ -22,3 +22,12 @@ def get_voiture(request, garageId):
         return Response({"detail": "Not found."}, status=404)
     serializer = VoitureSerializer(voiture,many=True)
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+def add_voiture(request):
+    serializer = VoitureSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

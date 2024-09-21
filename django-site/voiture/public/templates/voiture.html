@@ -11,10 +11,17 @@
 <div class="page">
 
     <div class="login-container">
+
         <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Submit</button>
+            {{ form_add.as_p }}
+            <button type="submit" name="form_add">Submit</button>
+        </form>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form_select.as_p }}
+            <button type="submit" name="form_select">Submit</button>
         </form>
 
         {% if voitures %}

@@ -3,9 +3,8 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 from django.http import HttpResponse
-from .forms import GarageAddForm, GarageDeleteForm, GarageEditForm, UserForm,GarageForm
+from .forms import GarageAddForm, GarageDeleteForm, GarageEditForm, UserForm,GarageForm, VoitureAddForm, VoitureSelectForm
 from api.models import Garage,Profile
-from .forms import GarageSelectForm
 import requests
 
 
@@ -24,8 +23,6 @@ def cle(request):
     return render(request, "cle.html")
 
 
-def voiture(request):
-    return render(request, "voiture.html")
 
 
 def login(request):
@@ -72,14 +69,27 @@ def garage(request):
     return render(request, 'garage.html', forms)
 
 
-def voiture_list(request):
+def voiture(request):
     voitures = []
-    form = GarageSelectForm(request.POST or None)
+    
+    form_select = VoitureSelectForm(request.POST or None)
+    form_add = VoitureAddForm(request.POST or None)
 
-    if request.method == 'POST' and form.is_valid():
-        garage = form.cleaned_data['garage']
-        url = request.build_absolute_uri(f'/api/voitures/{garage.id}/')
-        response = requests.get(url)
-        voitures = response.json()  
+    if request.method == 'POST':
+    
+        if form_select.is_valid() and "form_select" in request.POST:
+            print("----")
+            garage = form_select.cleaned_data['garage']
+            url = request.build_absolute_uri(f'/api/voitures/{garage.id}/')
+            response = requests.get(url)
+            voitures = response.json() 
+
+        elif form_add.is_valid() and "form_add" in request.POST:
+            data = form_add.cleaned_data
+            data["garage"] = data["garage"].id
+            url = request.build_absolute_uri(f'/api/voitures/add/')
+            response = requests.post(url, json=data)
         
-    return render(request, 'voiture.html', {'form': form, 'voitures': voitures})
+    forms = {'form_select': form_select, 'form_add' : form_add ,'voitures': voitures}
+    return render(request, 'voiture.html',forms )
+
