@@ -64,20 +64,22 @@ class GarageForm(forms.ModelForm):
 class VoitureSelectForm(forms.Form):
     garage = forms.ModelChoiceField(
         queryset = Garage.objects.all(), 
-        empty_label = "Select a Garage"
+        empty_label = "Select a Garage",
+        label=""
     )
 
 class VoitureAddForm(forms.Form):
     garage = forms.ModelChoiceField(
         queryset = Garage.objects.all(), 
-        empty_label = "Select a Garage"
+        empty_label = "Select a Garage",
+        label=""
     )
 
     couleur = forms.CharField(
         max_length = 200, 
         label="", 
         widget = forms.TextInput(attrs={
-            'placeholder': 'Entrer le nom'
+            'placeholder': 'Entrer la couleur'
         })    
     )
 
@@ -85,7 +87,7 @@ class VoitureAddForm(forms.Form):
         max_length = 200, 
         label="", 
         widget = forms.TextInput(attrs={
-            'placeholder': 'Entrer le nom'
+            'placeholder': 'Entrer l\'immatriculation'
         })    
     )
 
@@ -93,7 +95,7 @@ class VoitureAddForm(forms.Form):
         max_length = 200, 
         label="", 
         widget = forms.TextInput(attrs={
-            'placeholder': 'Entrer le nom'
+            'placeholder': 'Entrer la marque'
         })    
     )
 
@@ -101,7 +103,7 @@ class VoitureAddForm(forms.Form):
         max_length = 200, 
         label="", 
         widget = forms.TextInput(attrs={
-            'placeholder': 'Entrer le nom'
+            'placeholder': 'Entrer le modele'
         })    
     )
 
@@ -118,9 +120,9 @@ class GarageAddForm(forms.Form):
 class GarageEditForm(forms.Form):
     garage = forms.ModelChoiceField(
         queryset = Garage.objects.all(), 
-        empty_label = "Select a Garage"
+        empty_label = "Select a Garage",
+        label="", 
     )
-
     name = forms.CharField(
         max_length = 200, 
         label="", 
@@ -132,5 +134,6 @@ class GarageEditForm(forms.Form):
 class GarageDeleteForm(forms.Form):
     garage = forms.ModelChoiceField(
         queryset = Garage.objects.all(), 
-        empty_label = "Select a Garage"
+        empty_label = "Select a Garage",
+        label="", 
     )

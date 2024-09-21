@@ -17,6 +17,8 @@ class Profile(models.Model):
 class Garage(models.Model):
     nom = models.CharField(max_length=30, blank=False, null=False)
     
+    def __str__(self):
+        return self.nom
 
 class Voiture(models.Model):
     garage = models.ForeignKey(Garage, on_delete=models.CASCADE)

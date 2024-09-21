@@ -8,45 +8,63 @@
 
 
 {% block document_container %}
-<div class="page">
+<div class="page pageAsRow">
 
     <div class="login-container">
+        <h2>Ajouter une voiture</h2>
+
+        {% if messages %}
+            {% for message in messages %}
+                {% if "form_add" in message.tags%}
+                <p class="{{ message.tags }}">{{ message }}</p>
+                {% endif%}
+            {% endfor %}
+        {% endif %}
 
         <form method="post">
             {% csrf_token %}
             {{ form_add.as_p }}
             <button type="submit" name="form_add">Submit</button>
         </form>
+    </div>
 
+    <div class="login-container">
+        <h2>Voiture par garage</h2>
+
+        {% if messages %}
+            {% for message in messages %}
+                {% if "form_select" in message.tags%}
+                <p class="{{ message.tags }}">{{ message }}</p>
+                {% endif%}
+            {% endfor %}
+        {% endif %}
         <form method="post">
             {% csrf_token %}
             {{ form_select.as_p }}
             <button type="submit" name="form_select">Submit</button>
         </form>
-
         {% if voitures %}
-            <table>
-                <thead>
+        <table class="table-inside">
+            <thead>
+                <tr>
+                    <th>Couleur</th>
+                    <th>Immatriculation</th>
+                    <th>Marque</th>
+                    <th>Modèle</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for voiture in voitures %}
                     <tr>
-                        <th>Couleur</th>
-                        <th>Immatriculation</th>
-                        <th>Marque</th>
-                        <th>Modèle</th>
+                        <td>{{ voiture.couleur }}</td>
+                        <td>{{ voiture.immatriculation }}</td>
+                        <td>{{ voiture.marque }}</td>
+                        <td>{{ voiture.modele }}</td>
                     </tr>
-                </thead>
-                <tbody>
-                    {% for voiture in voitures %}
-                        <tr>
-                            <td>{{ voiture.couleur }}</td>
-                            <td>{{ voiture.immatriculation }}</td>
-                            <td>{{ voiture.marque }}</td>
-                            <td>{{ voiture.modele }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                {% endfor %}
+            </tbody>
+        </table>
         {% endif %}
-
 
     </div>
 
