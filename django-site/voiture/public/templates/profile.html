@@ -10,7 +10,7 @@
 
 {% block document_container %}
 
-<img src="{% static 'images/messi.jpg' %}" alt="My Image">
+<!-- <img src="{% static 'images/messi.jpg' %}" alt="My Image"> -->
 
 
 <h1>Profil : {{ user.username }}</h1>
@@ -22,11 +22,10 @@
 
     {% if profile.profile_picture %}
         <p>picture</p>
-        <img src="{{ user.profile_picture.url }}" alt="Profile Picture">
-        <img src="default.jpeg" alt="Profile Picture">
+        <img src="/media/{{ profile.profile_picture }}" alt="Profile Picture">
 
     {% else %}
-        <img src="https://via.placeholder.com/150" alt="Profile Picture">
+        <img src="/media/profile_pics/default.jpeg" alt="Profile Picture">
     {% endif %}
 
 
