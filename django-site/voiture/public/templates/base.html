@@ -8,6 +8,7 @@
         <title>{% block page_title %}{% endblock page_title %}</title>
         <link rel="stylesheet" type="text/css" href="{% static 'css/dark.css' %}">
         <script src="js/script.js"></script>
+        <link rel="icon" href="{% static 'images/pets.png' %}" type="image/x-icon">
     </head>
 
     <body>
@@ -30,6 +31,8 @@
                 </ul>
             </nav>
         </header>
+        <!-- To load static images  -->
+        <!-- <img src="{% static 'images/messi.jpg' %}" alt="My Image"> -->
 
         {% block document_body %}
             <div id=document-container>{% block document_container %}{% endblock document_container %}</div>

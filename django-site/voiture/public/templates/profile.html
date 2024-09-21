@@ -13,6 +13,7 @@
     Location: {{ profile.location }}
     user : {{ profile.user.username }}
     profile.user : {{ user.username }}
+</p>
 
     {% if profile.profile_picture %}
         <p>picture</p>
@@ -22,6 +23,8 @@
     {% else %}
         <img src="https://via.placeholder.com/150" alt="Profile Picture">
     {% endif %}
-</p>
+
+
+
 
 {% endblock document_container %}
