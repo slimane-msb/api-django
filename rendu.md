@@ -1,5 +1,5 @@
 # BDD
-![image](https://github.com/user-attachments/assets/1c602641-af2e-40f1-b534-f7faa8f97a9e)
+![image](https://github.com/user-attachments/assets/1c602641-af2e-40f1-b534-f7faa8f97a9e)(width=30%)
 
 
 # Infrastructure 
