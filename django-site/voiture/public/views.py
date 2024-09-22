@@ -25,14 +25,6 @@ def cle(request):
     return render(request, "cle.html")
 
 
-
-
-def login(request):
-    return render(request, "login.html")
-
-def logout(request):
-    return render(request, "logout.html")
-
 def signup(request):
     if request.method == 'POST':
         form = UserForm(request.POST)

@@ -1,6 +1,6 @@
 from django.urls import path,include
 from django.contrib.auth import views as auth_views
-from .views import home,signup,profile,login,logout,voiture,cle,garage
+from .views import home,signup,profile,voiture,cle,garage
 from .forms import MyLoginView
 
 urlpatterns = [

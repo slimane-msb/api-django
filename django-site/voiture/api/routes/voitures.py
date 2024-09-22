@@ -1,11 +1,9 @@
-from django.shortcuts import render,get_object_or_404
-from django.http import HttpResponse,JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from api.serializers import VoitureSerializer
 
-from api.models import Profile, Garage, Voiture, Cle
+from api.models import Voiture
 
 
 
