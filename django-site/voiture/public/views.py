@@ -20,7 +20,7 @@ def profile(request):
     profile = request.user.profile
     return render(request, "profile.html",{'profile': profile})
 
-
+@login_required
 def cle(request):
     return render(request, "cle.html")
 
@@ -43,7 +43,7 @@ def signup(request):
         form = UserForm()
     return render(request, 'signup.html', {'form': form})
 
-
+@login_required
 def garage(request):
     form_add = GarageAddForm()
     form_edit = GarageEditForm()
@@ -83,7 +83,7 @@ def garage(request):
     }
     return render(request, 'garage.html', forms)
 
-
+@login_required
 def voiture(request):
     voitures = []
     
