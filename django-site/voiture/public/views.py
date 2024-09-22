@@ -1,10 +1,8 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, authenticate
 
-# Create your views here.
-from django.http import HttpResponse
-from .forms import GarageAddForm, GarageDeleteForm, GarageEditForm, UserForm,GarageForm, VoitureAddForm, VoitureSelectForm
-from api.models import Garage,Profile
+from .forms import GarageAddForm, GarageDeleteForm, GarageEditForm, UserForm, VoitureAddForm, VoitureSelectForm
 import requests
 from django.contrib import messages
 
@@ -29,7 +27,14 @@ def signup(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)  
+            user.set_password(form.cleaned_data['password']) 
+            user.save()
+            user = authenticate(username=user.username, password=form.cleaned_data['password'])
+            if user is not None:
+                login(request, user) 
+                return redirect('/') 
+
             return redirect('/')  
     else:
         form = UserForm()

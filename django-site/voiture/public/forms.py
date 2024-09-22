@@ -29,7 +29,7 @@ class UserForm(forms.ModelForm):
     )
     class Meta:
         model = get_user_model()
-        fields = ['username', 'email', 'password']
+        fields = ['username', 'email']
 
 
 
@@ -53,11 +53,6 @@ class MyAuthenticationForm(AuthenticationForm):
 
 class MyLoginView(LoginView):
     form_class = MyAuthenticationForm
-
-
-
-class GarageForm(forms.ModelForm):
-    pass
 
 
 
