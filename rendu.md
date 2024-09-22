@@ -1,6 +1,6 @@
 # BDD
 <div align="center" style="width: 70%;">
-    <img src="https://github.com/user-attachments/assets/1c602641-af2e-40f1-b534-f7faa8f97a9e" width="30%" />
+    <img src="https://github.com/user-attachments/assets/1c602641-af2e-40f1-b534-f7faa8f97a9e" width="70%" />
 </div>
 
 # Infrastructure
