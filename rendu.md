@@ -3,6 +3,7 @@
 
 
 # Infrastructure 
+- L'infrastructure utilisée est celle du projet
 ![image](https://github.com/user-attachments/assets/acc2bf1b-b7a1-4b4d-8540-8bf9382f197c)
 
 # Routes 
