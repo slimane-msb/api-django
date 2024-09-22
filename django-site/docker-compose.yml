@@ -4,9 +4,12 @@ services:
   web:
     build: .
     command: >
-      sh -c "python voiture/manage.py collectstatic --noinput &&
-             python voiture/manage.py migrate &&
-             python voiture/manage.py runserver 0.0.0.0:8000"
+      sh -c "python voiture/manage.py collectstatic --noinput && \
+            python voiture/manage.py migrate && \
+            python voiture/manage.py createsuperuser \
+              --email ${SUPERUSER_EMAIL} --username ${SUPERUSER_NAME} --noinput && \
+            python voiture/manage.py shell < voiture/voiture/super.py
+            python voiture/manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/app
     ports:
