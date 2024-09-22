@@ -4,16 +4,34 @@ services:
   web:
     build: .
     command: >
+      sh -c "python voiture/manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+    depends_on:
+      - db
+      - api
+
+  api:
+    build: .
+    command: >
       sh -c "python voiture/manage.py collectstatic --noinput && \
             python voiture/manage.py migrate && \
             python voiture/manage.py createsuperuser \
               --email ${SUPERUSER_EMAIL} --username ${SUPERUSER_NAME} --noinput && \
             python voiture/manage.py shell < voiture/voiture/super.py
-            python voiture/manage.py runserver 0.0.0.0:8000"
+            python voiture/manage.py runserver 0.0.0.0:${API_PORT}"
     volumes:
       - .:/app
     ports:
-      - "8000:8000"
+      - "${API_PORT}:${API_PORT}"
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}

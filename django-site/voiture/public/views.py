@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
@@ -52,7 +53,7 @@ def garage(request):
             form_add = GarageAddForm(request.POST or None)
             if form_add.is_valid() :
                 data = {'nom': form_add.cleaned_data['name']}
-                url = request.build_absolute_uri('/api/garages/add/')
+                url = 'http://api:'+os.environ.get('API_PORT', '8001')+('/api/garages/add/')
                 requests.post(url, json=data)
                 messages.success(request, "form_add submitted successfully!", extra_tags="form_add")
     
@@ -61,7 +62,7 @@ def garage(request):
             if form_edit.is_valid():
                 data = {'nom': form_edit.cleaned_data['name']}
                 garage = form_edit.cleaned_data['garage']
-                url = request.build_absolute_uri(f'/api/garages/{garage.id}/edit/')
+                url = 'http://api:'+os.environ.get('API_PORT', '8001')+(f'/api/garages/{garage.id}/edit/')
                 requests.put(url, json=data)
                 messages.success(request, "form_edit submitted successfully!", extra_tags="form_edit")
 
@@ -69,7 +70,7 @@ def garage(request):
             form_delete = GarageDeleteForm(request.POST or None)
             if form_delete.is_valid() :
                 garage = form_delete.cleaned_data['garage']
-                url = request.build_absolute_uri(f'/api/garages/{garage.id}/delete/')
+                url = 'http://api:'+os.environ.get('API_PORT', '8001')+(f'/api/garages/{garage.id}/delete/')
                 requests.delete(url)
                 messages.success(request, "form_delete submitted successfully!",extra_tags="form_delete")
 
@@ -93,7 +94,7 @@ def voiture(request):
             form_select = VoitureSelectForm(request.POST or None)
             if form_select.is_valid() :
                 garage = form_select.cleaned_data['garage']
-                url = request.build_absolute_uri(f'/api/voitures/{garage.id}/')
+                url = 'http://api:'+os.environ.get('API_PORT', '8001')+(f'/api/voitures/{garage.id}/')
                 response = requests.get(url)
                 voitures = response.json() 
                 if response.status_code != 200 : 
@@ -104,7 +105,7 @@ def voiture(request):
             if form_add.is_valid() :
                 data = form_add.cleaned_data
                 data["garage"] = data["garage"].id
-                url = request.build_absolute_uri(f'/api/voitures/add/')
+                url = 'http://api:'+os.environ.get('API_PORT', '8001')+(f'/api/voitures/add/')
                 response = requests.post(url, json=data)
                 messages.success(request, "form_add submitted successfully!", extra_tags="form_add")
 
