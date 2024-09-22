@@ -1,140 +1,74 @@
-<p align="center">
-    <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/1/1d/Logo_T%C3%A9l%C3%A9com_SudParis.svg/153px-Logo_T%C3%A9l%C3%A9com_SudParis.svg.png" alt="TSP logo">
-</p>
+# BDD
+<div align="center" style="width: 70%;">
+    <img src="https://github.com/user-attachments/assets/1c602641-af2e-40f1-b534-f7faa8f97a9e" width="70%" />
+</div>
 
 
-# CSC 8567 - Architectures distribuées et applications web
+# Infrastructure
+- L'infrastructure utilisée est celle du projet
+<div align="center" style="width: 40%;">
+    <img src="https://github.com/user-attachments/assets/acc2bf1b-b7a1-4b4d-8540-8bf9382f197c" />
+</div>
 
-Auteurs : Timothée Mathubert, Gatien Roujanski, Arthur Jovart
+# Routes 
+## API 
+- **GET** `garages/` : récupérer la liste de tous les garages.
+- **GET** `garages/<int:pk>/` : récupérer un garage par son identifiant.
+- **POST** `garages/add/` : ajouter un garage en fournissant son nom. Exemple de données : `-d {'nom': 'nom du garage'}`.
+- **PUT/PATCH** `garages/<int:pk>/edit/` : modifier un garage en fournissant un nouveau nom. Exemple de données : `-d {'nom': 'nouveau nom'}`.
+- **DELETE** `garages/<int:pk>/delete/` : supprimer un garage par son identifiant.
 
-## Emails
+- **GET** `voitures/` : récupérer la liste de toutes les voitures.
+- **GET** `voitures/<int:garageId>/` : récupérer une voiture par l'identifiant de son garage.
+- **POST** `voitures/add/` : ajouter une voiture en fournissant toutes les informations nécessaires sous forme de JSON. Exemple de données : `-d {json contenant tous les champs de la voiture}`.
 
-Lorsque vous envoyez un mail, pensez bien à mettre "CSC 8567" au début de l'objet !
-- timothee.mathubert@telecom-sudparis.eu
-- gatien.roujanski@telecom-sudparis.eu
-- arthur.jovart@telecom-sudparis.eu
 
-## Consignes
+# public 
+- **GET** `login/` : accéder à la page de connexion (Login).
+- **GET** `signup/` : accéder à la page d'inscription (Signup).
+- **GET** `profile/` : voir le profil de l'utilisateur connecté.
+- **GET** `voiture/` : accéder à la page des voitures pour obtenir les formulaires de récupération de données.
+- **GET** `garage/` : accéder à la page des garages pour obtenir les formulaires de récupération de données.
 
-1. **Allez avant tout à la rubrique "Installation" ci-dessous pour installer ce dont vous aurez besoin pour le cours !**
 
-2. Formez des groupes en trinômes, les plus hétérogènes possibles en niveau, et communiquez votre groupe à un enseignant.
+# Question 
+## Django 
 
-3. **Ce cours est exclusivement un cours-projet : il n'y aura pas d'examen à la fin.** En revanche, il y aura deux rendus de projet (24 septembre et 21 novembre) ainsi qu'une soutenance à la fin du cours (21 novembre).
+1. **Suite de requêtes et d'exécutions permettant l'affichage d'une page HTML** : 
+   - On commence par recevoir la requête, puis vérifier si le endpoint existe dans la liste des URL de `urls.py` du projet. Le chemin `/` est ensuite redirigé vers l'application `public`, qui, à son tour, redirige vers la vue "home". Cette vue renvoie une page HTML `index.html`.
 
-4. Vous pouvez faire le projet que vous souhaitez sous certaines conditions :
-- **Vous devez disposer de deux applications Django**, une pour **un frontend** et l'autre pour **une API retournant des données au format JSON**. 
-- Votre site web doit être accessible depuis votre interface loopback (sur l'IP 127.0.0.1) de votre PC, et contenir au moins deux pages : une pour faire des requêtes à l'API, l'autre pour afficher une liste d'objets.
-- **Votre site doit utiliser une base de données non locale (pas de fichier).** Celle-ci doit contenir un schéma relationnel de données similaire à celui ci-dessous :
+2. **Configurer la base de données** : 
+   - La base de données est à configurer dans le fichier `settings.py` et l'ensemble des schémas de base dans le fichier `models.py`. 
 
-<p align="center">
-    <img src="https://github.com/user-attachments/assets/4cd224f5-5f64-48b7-bd6f-c25f301275ca" alt="BDD">
-</p>
+3. **Configurer le fichier de paramètres du projet** : 
+   - `settings.py` : Pour les configurations de base, comme les applications à installer, les hôtes autorisés, le chemin pour les fichiers statiques et médias, etc.
+   - `apps.py` : Ce fichier permet de configurer chaque application du projet. Par exemple, pour l'API, on configure l'importation des signaux, qui sont déclenchés lors de la création d'un utilisateur pour générer un profil correspondant. Il est possible d'étendre la classe `User`, mais une bonne pratique consiste à créer un modèle `Profile` pour stocker les champs supplémentaires tels que la photo de profil, la localisation, etc.
 
-- Pour le rendu du 24 septembre, vous devez déployer une infrastructure similaire à celle ci-dessous en utilisant un fichier `docker-compose.yml` et des Dockerfiles. **L'application Django de l'API et du frontend devront être placées dans deux conteneurs différents. La base de données et le proxy seront dans deux conteneurs différents.**
+4. **Makemigrations** : 
+   - `makemigrations` : Django lit les fichiers `models.py` et les fichiers de migrations pour détecter les changements à apporter à la base de données. Si des modifications sont détectées, elles sont enregistrées dans des fichiers de migration, qui représentent des instructions à exécuter ultérieurement sur la base de données.
+   - `migrate` : Cette commande applique les instructions générées lors de l'étape précédente sur la base de données et met à jour la table des migrations, qui stocke les métadonnées concernant les modifications appliquées.
 
-<p align="center">
-    <img src="https://github.com/user-attachments/assets/877dfc8f-ae0b-41e0-a934-19480d839d0c" alt="Infra à reproduire">
-</p>
+## Docker 
 
-- Pour vous aider tout au long du projet, __**consultez ces différentes pages de documentation et demandez de l'aide aux enseignants**__ :
-    - Django : https://docs.djangoproject.com/en/5.1/
-    - Docker : https://docs.docker.com/manuals/ 
-    - Kubernetes (rendu final seulement) : https://kubernetes.io/fr/docs/home/
-    - Nginx (Proxy) : https://nginx.org/en/docs/
-- *Vous pouvez ajouter des applications, ajouter de la forme (Styles CSS, Bootstrap, Bulma) et des pages supplémentaires si vous le souhaitez.*
-- Les consignes pour le rendu final avec Kubernetes vous seront communiquées après le rendu du CC Django + Docker.
+1. **Commandes Docker** : 
+   - `FROM` : Indique quelle image et quelle version récupérer pour commencer le build.
+   - `RUN` : Exécute une commande lors du build.
+   - `WORKDIR` : Définit le répertoire de travail du conteneur, équivalent à `~`.
+   - `EXPOSE` : Ouvre des ports spécifiques.
+   - `CMD` : Exécute une commande lors du lancement du conteneur, généralement une seule commande ou un script.
 
-## Modalités de rendu pour le CC Django + Docker
+2. **Service** : 
+   - `ports: "80:80"` : Connecte le port 80 de la machine locale au port 80 du conteneur. Si on appelle la machine sur le port 80, cette requête sera redirigée vers le port 80 du conteneur.
+   - `context: .` : Indique dans quel dossier chercher le Dockerfile.
+   - `dockerfile: Dockerfile.api` : Indique quel Dockerfile exécuter pour le build.
+   - `depends_on` : Crée un réseau entre les conteneurs. Par exemple, pour requêter l'API depuis le service web, on peut exécuter `curl -X GET http://api:8001/api/...`.
+   - `environment` : Définit les variables d'environnement depuis un fichier `.env`.
 
-Vous devez rendre tout le contenu de votre dépôt Github sous forme d'archive .zip ou .tar.gz, que vous avez créé à partir de ce modèle CSC8567-Projets.
+3. **ENV** : 
+   - Définir une variable d'environnement dans un conteneur :
+     - Les inclure lors du build dans le fichier Dockerfile ou via le fichier docker-compose dans `environment` depuis `.env` ou explicitement
+     - Se connecter au conteneur et les définir manuellement via `docker-compose exec web sh`, utile pour déboguer.
 
-Ce rendu est individuel.
+4. **Réseau Docker** : 
+   - Remplacer l'IP par le nom du service, par exemple `http://web:8000`.
 
-Il contient donc :
-
- - Le projet Django fonctionnel, avec le code des deux applications (public et api).
-
- - Les fichiers Dockerfile.front (qui crée l'image de l'application "public") et Dockerfile.api (qui crée l'image de l'applicattion "api")
-
- - Le fichier docker-compose.yml
-
- - Le fichier nginx.conf (configuration du proxy)
-
-Il faut, dans la même archive zip, ajouter :
-
- - Un schéma de votre base de données
- - Un schéma de votre infrastructure réseau (réseau(x) virtuel(s) Docker + lien à votre PC)
- - Un fichier récapitulant la liste des chemins URL de votre site (/public, /api, ...)
-
-Ces deux schémas sont similaires à ceux affichés dans les consignes ci-dessus.
-
-**Votre architecture finale doit être telle que la commande "docker-compose up --build" démarre toutes vos applications, la base de données, le proxy et toutes les connexions demandées** (se référer au schéma sur le modèle Github). Ainsi, votre site doit être accessible depuis 127.0.0.1 directement dans un navigateur après l'exécution de la commande "docker-compose up --build".
-
-N'hésitez pas à ajouter à votre rendu des commentaires, qui nous aideront à mieux évaluer vos projets (et à les valoriser !).
-
-Bon courage !
-
-## Installation
-
-**Il est recommandé d'utiliser un système d'exploitation type Linux.**
-L'installation suivante fonctionne sous Ubuntu. En fonction de votre OS, il est possible qu'apt ne soit pas le gestionnaire de paquets. Remplacez simplement apt dans les commandes suivantes par votre gestionnaire de paquets.
-
-1. Créez votre propre répo de groupe en cliquant sur "Use this template"
-   
-2. Créer un environnement virtuel Python avec Pyenv (non nécessaire si vous avez déjà un gestionnaires d'environnements virtuels pour Python)
-```
-sudo apt update -y
-sudo apt install pip curl
-curl https://pyenv.run | bash
-```
-Si vous utilisez Bash comme exécuteur de commande dans votre Shell :
-```
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
-echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
-echo 'eval "$(pyenv init -)"' >> ~/.bashrc
-```
-Si vous utilisez autre chose, allez voir la [documentation Pyenv](https://github.com/pyenv/pyenv?tab=readme-ov-file#set-up-your-shell-environment-for-pyenv).
-
-Ensuite :
-```
-pyenv install 3.12
-```
-3. Installer les dépendances utiles
-```
-pip install django psycopg2-binary
-```
-4. Créer le projet Django & vérifier qu'il tourne correctement
-```
-cd django-site
-django-admin startproject [nom-de-votre-projet] <-- A REMPLACER
-python manage.py runserver
-```
-Allez sur 127.0.0.1:8000 sur un navigateur. Si une page "Congratulations!" s'affiche, c'est que tout fonctionne bien !
-
-5. Créer les applications utiles
-```
-python manage.py startapp public
-python manage.py startapp api
-```
-
-6. Installer Docker
-```
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-docker -v
-```
-Si la dernière commande vous affiche la version de Docker, c'est qu'il est correctement installé.
-
-7. Créer un compte Docker Hub
-
-Allez sur https://hub.docker.com et créez vous un compte.
-
-8. Installer kubectl
-```
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-kubectl version --client
-```
-Si la dernière commande vous affiche la version de kubectl, c'est qu'il est correctement installé.
-
-Et c'est parti !
