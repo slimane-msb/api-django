@@ -1,10 +1,13 @@
 # BDD
-![image](https://github.com/user-attachments/assets/1c602641-af2e-40f1-b534-f7faa8f97a9e)(width=30%)
+<div align="center" style="width: 50%;">
+    <img src="https://github.com/user-attachments/assets/1c602641-af2e-40f1-b534-f7faa8f97a9e" width="30%" />
+</div>
 
-
-# Infrastructure 
-- L'infrastructure utilisée est celle du projet
-![image](https://github.com/user-attachments/assets/acc2bf1b-b7a1-4b4d-8540-8bf9382f197c)
+# Infrastructure
+<div align="center" style="width: 50%;">
+    <p>- L'infrastructure utilisée est celle du projet</p>
+    <img src="https://github.com/user-attachments/assets/acc2bf1b-b7a1-4b4d-8540-8bf9382f197c" />
+</div>
 
 # Routes 
 ## API 
