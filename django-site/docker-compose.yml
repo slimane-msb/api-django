@@ -4,7 +4,8 @@ services:
   web:
     build: .
     command: >
-      sh -c "python voiture/manage.py runserver 0.0.0.0:8000"
+      sh -c "python voiture/manage.py collectstatic --noinput && \
+          python voiture/manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/app
     ports:
@@ -49,6 +50,17 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8080:80"
+    depends_on:
+      - web
+      - api 
+
 
 volumes:
   postgres_data:
