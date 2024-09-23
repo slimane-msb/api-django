@@ -52,9 +52,6 @@ def signup(request):
 
 @login_required
 def garage(request):
-    form_add = GarageAddForm()
-    form_edit = GarageEditForm()
-    form_delete = GarageDeleteForm()
 
     if request.method == 'POST':
     
@@ -82,6 +79,10 @@ def garage(request):
                 url = 'http://api:'+os.environ.get('API_PORT', '8001')+(f'/api/garages/{garage}/delete/')
                 requests.delete(url)
                 messages.success(request, "form_delete submitted successfully!",extra_tags="form_delete")
+    
+    form_add = GarageAddForm()
+    form_edit = GarageEditForm()
+    form_delete = GarageDeleteForm()
 
     forms = {
         'form_add': form_add, 
@@ -93,9 +94,6 @@ def garage(request):
 @login_required
 def voiture(request):
     voitures = []
-    
-    form_select = VoitureSelectForm()
-    form_add = VoitureAddForm()
 
     if request.method == 'POST':
     
@@ -118,6 +116,8 @@ def voiture(request):
                 response = requests.post(url, json=data)
                 messages.success(request, "form_add submitted successfully!", extra_tags="form_add")
 
+    form_select = VoitureSelectForm()
+    form_add = VoitureAddForm()
     forms = {'form_select': form_select, 'form_add' : form_add ,'voitures': voitures}
     return render(request, 'voiture.html',forms )
 
