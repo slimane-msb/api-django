@@ -14,6 +14,12 @@ urlpatterns = [
     path('voitures/add/', views.add_voiture, name='add_garage'),       
 
 
+    path('profile/<int:userId>/', views.get_profile, name='get_profile'),  
+
+    path('users/add/', views.add_user, name='add_user'),       
+
+
+
 
 ]
 

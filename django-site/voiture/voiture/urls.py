@@ -22,14 +22,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 if(os.environ.get("RUNNING_CONTAINER") == "public") :
-    url = path("", include("public.urls"))
+    url = [
+        path("", include("public.urls")),
+    ]
 else : 
-    url = path("api/", include("api.urls"))
+    url = [
+        path('admin/', admin.site.urls),
+        path("api/", include("api.urls"))
+    ]
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    url,
-]
+urlpatterns = url
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
