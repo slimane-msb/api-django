@@ -71,7 +71,7 @@ class VoitureSelectForm(forms.Form):
             choices = []
         
         self.fields['garage'] = forms.ChoiceField(
-            choices=choices,
+            choices=[("", "Selectionner un garage")]+choices,
             label="",
             required=True
         )
@@ -86,7 +86,7 @@ class VoitureAddForm(forms.Form):
             choices = []
         
         self.fields['garage'] = forms.ChoiceField(
-            choices=choices,
+            choices=[("", "Selectionner un garage")]+choices,
             label="",
             required=True
         )
@@ -145,7 +145,7 @@ class GarageEditForm(forms.Form):
             choices = []
         
         self.fields['garage'] = forms.ChoiceField(
-            choices=choices,
+            choices=[("", "Selectionner un garage")]+choices,
             label="",
             required=True
         )
@@ -169,7 +169,7 @@ class GarageDeleteForm(forms.Form):
             choices = []
         
         self.fields['garage'] = forms.ChoiceField(
-            choices=choices,
+            choices=[("", "Selectionner un garage")]+choices,
             label="",
             required=True
         )

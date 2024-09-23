@@ -10,6 +10,19 @@
     <img src="https://github.com/user-attachments/assets/acc2bf1b-b7a1-4b4d-8540-8bf9382f197c" />
 </div>
 
+# INFOS : 
+- API : http://0.0.0.0:8001/
+- Site : http://0.0.0.0:8000/
+- Admin : http://0.0.0.0:8001/admin 
+
+# Actions possible à réaliser
+- Créer un garage
+- Modifier le nom d'un garage
+- Supprimer un garage
+- Ajouter une voiture à un garage
+- Afficher les voitures dans un garage
+
+
 # Routes 
 ## API 
 - **GET** `garages/` : récupérer la liste de tous les garages.
