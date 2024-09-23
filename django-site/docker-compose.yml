@@ -4,7 +4,7 @@ services:
   web:
     build: 
       context: ./voiture
-      dockerfile: Dockerfile.api
+      dockerfile: Dockerfile.front
     command: >
       sh -c "python manage.py collectstatic --noinput && \
           python manage.py runserver 0.0.0.0:8000"

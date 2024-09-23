@@ -1,9 +1,16 @@
+import os
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm,UsernameField
 from django.contrib.auth.views import LoginView
+import requests
 
-from api.models import Garage
+def api_get_garages():
+    response = requests.get('http://api:' + os.environ.get('API_PORT', '8001') + '/api/garages/')
+    response.raise_for_status()
+    garages_data = response.json() 
+    choices = [(garage['id'], garage['nom']) for garage in garages_data]
+    return choices
 
 class UserForm(forms.ModelForm):
     username = forms.CharField(
@@ -55,52 +62,69 @@ class MyLoginView(LoginView):
     form_class = MyAuthenticationForm
 
 
-
 class VoitureSelectForm(forms.Form):
-    garage = forms.ModelChoiceField(
-        queryset = Garage.objects.all(), 
-        empty_label = "Select a Garage",
-        label=""
-    )
+    def __init__(self, *args, **kwargs):
+        super(VoitureSelectForm, self).__init__(*args, **kwargs)
+        try:
+            choices = api_get_garages()
+        except requests.RequestException as e:
+            choices = []
+        
+        self.fields['garage'] = forms.ChoiceField(
+            choices=choices,
+            label="",
+            required=True
+        )
+
 
 class VoitureAddForm(forms.Form):
-    garage = forms.ModelChoiceField(
-        queryset = Garage.objects.all(), 
-        empty_label = "Select a Garage",
-        label=""
-    )
+    def __init__(self, *args, **kwargs):
+        super(VoitureAddForm, self).__init__(*args, **kwargs)
+        try:
+            choices = api_get_garages()
+        except requests.RequestException as e:
+            choices = []
+        
+        self.fields['garage'] = forms.ChoiceField(
+            choices=choices,
+            label="",
+            required=True
+        )
 
-    couleur = forms.CharField(
-        max_length = 200, 
-        label="", 
-        widget = forms.TextInput(attrs={
-            'placeholder': 'Entrer la couleur'
-        })    
-    )
+        self.fields['couleur']  = forms.CharField(
+            max_length = 200, 
+            label="", 
+            widget = forms.TextInput(attrs={
+                'placeholder': 'Entrer la couleur'
+            })    
+        )
 
-    immatriculation = forms.CharField(
-        max_length = 200, 
-        label="", 
-        widget = forms.TextInput(attrs={
-            'placeholder': 'Entrer l\'immatriculation'
-        })    
-    )
+        self.fields['immatriculation']  = forms.CharField(
+            max_length = 200, 
+            label="", 
+            widget = forms.TextInput(attrs={
+                'placeholder': 'Entrer l\'immatriculation'
+            })    
+        )
 
-    marque = forms.CharField(
-        max_length = 200, 
-        label="", 
-        widget = forms.TextInput(attrs={
-            'placeholder': 'Entrer la marque'
-        })    
-    )
+        self.fields['marque']  = forms.CharField(
+            max_length = 200, 
+            label="", 
+            widget = forms.TextInput(attrs={
+                'placeholder': 'Entrer la marque'
+            })    
+        )
 
-    modele = forms.CharField(
-        max_length = 200, 
-        label="", 
-        widget = forms.TextInput(attrs={
-            'placeholder': 'Entrer le modele'
-        })    
-    )
+        self.fields['modele']  = forms.CharField(
+            max_length = 200, 
+            label="", 
+            widget = forms.TextInput(attrs={
+                'placeholder': 'Entrer le modele'
+            })    
+        )
+
+
+
 
 class GarageAddForm(forms.Form):
     name = forms.CharField(
@@ -113,22 +137,39 @@ class GarageAddForm(forms.Form):
 
 
 class GarageEditForm(forms.Form):
-    garage = forms.ModelChoiceField(
-        queryset = Garage.objects.all(), 
-        empty_label = "Select a Garage",
-        label="", 
-    )
-    name = forms.CharField(
-        max_length = 200, 
-        label="", 
-        widget = forms.TextInput(attrs={
-            'placeholder': 'Entrer le nom'
-        })    
-    )
+    def __init__(self, *args, **kwargs):
+        super(GarageEditForm, self).__init__(*args, **kwargs)
+        try:
+            choices = api_get_garages()
+        except requests.RequestException as e:
+            choices = []
+        
+        self.fields['garage'] = forms.ChoiceField(
+            choices=choices,
+            label="",
+            required=True
+        )
+
+        self.fields['name'] = forms.CharField(
+            max_length = 200, 
+            label="", 
+            widget = forms.TextInput(attrs={
+                'placeholder': 'Entrer le nom'
+            })    
+        )
+    
+  
 
 class GarageDeleteForm(forms.Form):
-    garage = forms.ModelChoiceField(
-        queryset = Garage.objects.all(), 
-        empty_label = "Select a Garage",
-        label="", 
-    )
+    def __init__(self, *args, **kwargs):
+        super(GarageDeleteForm, self).__init__(*args, **kwargs)
+        try:
+            choices = api_get_garages()
+        except requests.RequestException as e:
+            choices = []
+        
+        self.fields['garage'] = forms.ChoiceField(
+            choices=choices,
+            label="",
+            required=True
+        )
