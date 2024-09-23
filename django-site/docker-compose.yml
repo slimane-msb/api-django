@@ -2,12 +2,14 @@ version: '3.8'
 
 services:
   web:
-    build: .
+    build: 
+      context: ./voiture
+      dockerfile: Dockerfile.api
     command: >
-      sh -c "python voiture/manage.py collectstatic --noinput && \
-          python voiture/manage.py runserver 0.0.0.0:8000"
+      sh -c "python manage.py collectstatic --noinput && \
+          python manage.py runserver 0.0.0.0:8000"
     volumes:
-      - .:/app
+      - ./voiture:/app
       - static_volume:/static
     ports:
       - "8000:8000"
@@ -22,16 +24,18 @@ services:
       - api
 
   api:
-    build: .
+    build: 
+      context: ./voiture
+      dockerfile: Dockerfile.api
     command: >
-      sh -c "python voiture/manage.py collectstatic --noinput && \
-            python voiture/manage.py migrate && \
-            python voiture/manage.py createsuperuser \
+      sh -c "python manage.py collectstatic --noinput && \
+            python manage.py migrate && \
+            python manage.py createsuperuser \
               --email ${SUPERUSER_EMAIL} --username ${SUPERUSER_NAME} --noinput && \
-            python voiture/manage.py shell < voiture/voiture/super.py
-            python voiture/manage.py runserver 0.0.0.0:${API_PORT}"
+            python manage.py shell < voiture/super.py
+            python manage.py runserver 0.0.0.0:${API_PORT}"
     volumes:
-      - .:/app
+      - ./voiture:/app
     ports:
       - "${API_PORT}:${API_PORT}"
     environment:
