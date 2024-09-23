@@ -14,6 +14,7 @@ services:
     ports:
       - "8000:8000"
     environment:
+      - RUNNING_CONTAINER=public
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -39,6 +40,7 @@ services:
     ports:
       - "${API_PORT}:${API_PORT}"
     environment:
+      - RUNNING_CONTAINER=api.apps.ApiConfig
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
