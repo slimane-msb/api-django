@@ -17,21 +17,21 @@ class UserForm(forms.ModelForm):
         max_length = 200, 
         label="", 
         widget=forms.TextInput(attrs={
-            'placeholder': 'Enter your username'
+            'placeholder': 'Enter votre username'
         })    
     )
     email = forms.CharField(
         max_length = 200, 
         label="", 
         widget=forms.EmailInput(attrs={
-            'placeholder': 'Enter your email'
+            'placeholder': 'Enter votre email'
         })    
     )
     password = forms.CharField(
         max_length = 200, 
         label="", 
         widget=forms.PasswordInput(attrs={
-            'placeholder': 'Enter your password'
+            'placeholder': 'Enter votre password'
         })    
     )
     class Meta:

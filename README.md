@@ -11,9 +11,13 @@
 </div>
 
 # INFOS : 
-- API : http://0.0.0.0:8001/
-- Site : http://0.0.0.0:8000/
-- Admin : http://0.0.0.0:8001/admin 
+- **API** : http://0.0.0.0:8001/
+- **Site** : http://0.0.0.0:8000/
+- **Admin** : http://0.0.0.0:8001/admin 
+
+
+- **Depuis NGNIX** : http://0.0.0.0:8080 :( ça marche pas encore, j'ai un bug avec les fichiers statiques, j'ai donc laissé les ports ouverts pour le site et api pour l'instant 
+
 
 # Actions possible à réaliser
 - Créer un garage
@@ -84,4 +88,12 @@
 
 4. **Réseau Docker** : 
    - Remplacer l'IP par le nom du service, par exemple `http://web:8000`.
+
+
+# Sources :
+- https://docs.djangoproject.com/en/5.1/
+- https://www.w3schools.com/django/
+- https://stackoverflow.com/
+- Les générateurs de texte pour certaines tâches répétitives.
+- Github
 
