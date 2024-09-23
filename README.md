@@ -10,6 +10,11 @@
     <img src="https://github.com/user-attachments/assets/acc2bf1b-b7a1-4b4d-8540-8bf9382f197c" />
 </div>
 
+
+# BUILD : 
+- Lancer la commande `cp env-exemple .env & sudo docker-compose up`
+
+
 # INFOS : 
 - **API** : http://0.0.0.0:8001/
 - **Site** : http://0.0.0.0:8000/

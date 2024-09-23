@@ -9,7 +9,7 @@ services:
       sh -c "python manage.py collectstatic --noinput && \
           python manage.py runserver 0.0.0.0:8000"
     volumes:
-      # - ./voiture:/app (uniquement pour debuger)
+      - ./voiture:/app
       - static:/static
       - media:/media
     ports:
@@ -36,8 +36,8 @@ services:
               --email ${SUPERUSER_EMAIL} --username ${SUPERUSER_NAME} --noinput && \
             python manage.py shell < voiture/super.py
             python manage.py runserver 0.0.0.0:${API_PORT}"
-    # volumes:
-      # - ./voiture:/app (uniquement pour debuger)
+    volumes:
+      - ./voiture:/app
     ports:
       - "${API_PORT}:${API_PORT}"
     environment:
