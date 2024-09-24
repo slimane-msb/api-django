@@ -18,9 +18,9 @@
 # INFOS : 
 - **Depuis NGNIX** : http://0.0.0.0:8080 
 
-- **API** : http://0.0.0.0:8001/
-- **Site** : http://0.0.0.0:8000/
-- **Admin** : http://0.0.0.0:8001/admin 
+- **API** : http://0.0.0.0:8080/api
+- **Site** : http://0.0.0.0:8080/
+- **Admin** : http://0.0.0.0:8080/admin 
 
 
 

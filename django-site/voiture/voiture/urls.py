@@ -27,7 +27,7 @@ if(os.environ.get("RUNNING_CONTAINER") == "public") :
     ]
 else : 
     url = [
-        path('admin/', admin.site.urls),
+        path('api/admin/', admin.site.urls),
         path("api/", include("api.urls"))
     ]
 

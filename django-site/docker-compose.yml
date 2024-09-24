@@ -12,8 +12,8 @@ services:
       - ./voiture:/app
       - static:/static
       - media:/media
-    ports:
-      - "8000:8000"
+    # ports:
+    #   - "8000:8000"
     environment:
       - RUNNING_CONTAINER=public
       - POSTGRES_DB=${POSTGRES_DB}
@@ -38,8 +38,8 @@ services:
             python manage.py runserver 0.0.0.0:${API_PORT}"
     volumes:
       - ./voiture:/app
-    ports:
-      - "${API_PORT}:${API_PORT}"
+    # ports:
+    #   - "${API_PORT}:${API_PORT}"
     environment:
       - RUNNING_CONTAINER=api.apps.ApiConfig
       - POSTGRES_DB=${POSTGRES_DB}
