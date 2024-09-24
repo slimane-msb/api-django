@@ -5,13 +5,11 @@ services:
     build: 
       context: ./voiture
       dockerfile: Dockerfile.front
-    command: >
-      sh -c "python manage.py collectstatic --noinput && \
-          python manage.py runserver 0.0.0.0:8000"
+    # command: gunicorn voiture.wsgi:application --bind 0.0.0.0:8000
     volumes:
-      - ./voiture:/app
-      - static:/static
-      - media:/media
+      # - ./voiture:/app
+      - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/mediafiles
     ports:
       - "8000:8000"
     environment:
@@ -60,11 +58,10 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   nginx:
-    image: nginx:latest
+    build: ./nginx
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-      - static:/static
-      - media:/media
+      - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/mediafiles
     ports:
       - "8080:80"
     depends_on:
@@ -74,6 +71,6 @@ services:
 
 volumes:
   postgres_data:
-  static:
-  media:
+  static_volume:
+  media_volume:
 

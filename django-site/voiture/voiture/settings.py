@@ -29,6 +29,11 @@ DEBUG = int(os.environ.get("DEBUG", default=1))
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost','127.0.0.1','api']
 
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+
+
+CSRF_TRUSTED_ORIGINS = ["http://localhost:8080"]
+
 
 # Application definition
 
@@ -124,15 +129,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-STATIC_URL = '/static/'
-STATIC_ROOT = '/static/'
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'files' / 'static' 
-]
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = '/media/'
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "mediafiles"
 
 
 
@@ -140,7 +143,6 @@ MEDIA_ROOT = '/media/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 # login
 LOGIN_REDIRECT_URL = '/'
