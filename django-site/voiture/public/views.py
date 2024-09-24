@@ -61,7 +61,7 @@ def garage(request):
                 data = {'nom': form_add.cleaned_data['name']}
                 url = 'http://api:'+os.environ.get('API_PORT', '8001')+('/api/garages/add/')
                 requests.post(url, json=data)
-                messages.success(request, "form_add submitted successfully!", extra_tags="form_add")
+                messages.success(request, "Ajouté avec succès!", extra_tags="form_add")
     
         elif  "form_edit" in request.POST:
             form_edit = GarageEditForm(request.POST or None)
@@ -70,7 +70,7 @@ def garage(request):
                 garage = form_edit.cleaned_data['garage']
                 url = 'http://api:'+os.environ.get('API_PORT', '8001')+(f'/api/garages/{garage}/edit/')
                 requests.put(url, json=data)
-                messages.success(request, "form_edit submitted successfully!", extra_tags="form_edit")
+                messages.success(request, "Modifié avec succès!", extra_tags="form_edit")
 
         elif "form_delete" in request.POST:
             form_delete = GarageDeleteForm(request.POST or None)
@@ -78,7 +78,7 @@ def garage(request):
                 garage = form_delete.cleaned_data['garage']
                 url = 'http://api:'+os.environ.get('API_PORT', '8001')+(f'/api/garages/{garage}/delete/')
                 requests.delete(url)
-                messages.success(request, "form_delete submitted successfully!",extra_tags="form_delete")
+                messages.success(request, "Supprimé avec succès!",extra_tags="form_delete")
     
     form_add = GarageAddForm()
     form_edit = GarageEditForm()
@@ -105,7 +105,7 @@ def voiture(request):
                 response = requests.get(url)
                 voitures = response.json() 
                 if response.status_code != 200 : 
-                    messages.error(request, "aucune voiture dans ce garage!", extra_tags="form_select")
+                    messages.error(request, "Aucune voiture dans ce garage!", extra_tags="form_select")
 
         elif  "form_add" in request.POST:
             form_add = VoitureAddForm(request.POST or None)
@@ -114,7 +114,7 @@ def voiture(request):
                 data["garage"] = data["garage"]
                 url = 'http://api:'+os.environ.get('API_PORT', '8001')+(f'/api/voitures/add/')
                 response = requests.post(url, json=data)
-                messages.success(request, "form_add submitted successfully!", extra_tags="form_add")
+                messages.success(request, "Ajouté avec succès!", extra_tags="form_add")
 
     form_select = VoitureSelectForm()
     form_add = VoitureAddForm()
