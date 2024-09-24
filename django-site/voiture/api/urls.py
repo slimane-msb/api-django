@@ -18,8 +18,5 @@ urlpatterns = [
 
     path('users/add/', views.add_user, name='add_user'),       
 
-
-
-
 ]
 

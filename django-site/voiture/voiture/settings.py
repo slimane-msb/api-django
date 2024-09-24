@@ -28,7 +28,7 @@ DEBUG = int(os.environ.get("DEBUG", default=1))
 
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost','127.0.0.1','api']
-
+CSRF_TRUSTED_ORIGINS = ['http://0.0.0.0:8080']
 
 # Application definition
 
