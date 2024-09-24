@@ -16,12 +16,14 @@
 
 
 # INFOS : 
+- **Depuis NGNIX** : http://0.0.0.0:8080 
+
 - **API** : http://0.0.0.0:8001/
 - **Site** : http://0.0.0.0:8000/
 - **Admin** : http://0.0.0.0:8001/admin 
 
 
-- **Depuis NGNIX** : http://0.0.0.0:8080 :( ça marche pas encore, j'ai un bug avec les fichiers statiques, j'ai donc laissé les ports ouverts pour le site et api pour l'instant 
+
 
 
 # Actions possible à réaliser
