@@ -16,7 +16,7 @@
 
 
 # INFOS : 
-- **Depuis NGNIX** : http://0.0.0.0:8080 
+- **Depuis NGNIX** : http://0.0.0.0:8080
 
 - **API** : http://0.0.0.0:8080/api
 - **Site** : http://0.0.0.0:8080/

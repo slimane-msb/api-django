@@ -13,9 +13,9 @@
 
     <div class="profile-container">
         {% if profile.profile_picture %}
-            <img src="/media/{{ profile.profile_picture }}"  alt="Profile Picture" class="profile-picture">
+            <img src="{{ profile.profile_picture }}"  alt="Profile Picture" class="profile-picture">
         {% else %}
-            <img src="/media/profile_pics/default.jpeg"  alt="Profile Picture" class="profile-picture">
+            <img src="/static/images/default.jpeg"  alt="Profile Picture" class="profile-picture">
         {% endif %}
         <h1 class="name">{{ user.username }}</h1>
         {% if user.email %}
@@ -25,5 +25,6 @@
             <p class="email">{{ profile.location }}</p>
         {% endif %}
     </div>
+      
 </div>
 {% endblock document_container %}

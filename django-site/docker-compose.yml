@@ -8,7 +8,7 @@ services:
     command: >
       sh -c "python manage.py collectstatic --noinput && \
           python manage.py runserver 0.0.0.0:8000"
-    volumes:
+    volumes:      
       - ./voiture:/app
       - static:/static
       - media:/media
@@ -38,6 +38,7 @@ services:
             python manage.py runserver 0.0.0.0:${API_PORT}"
     volumes:
       - ./voiture:/app
+      - media:/media
     # ports:
     #   - "${API_PORT}:${API_PORT}"
     environment:
