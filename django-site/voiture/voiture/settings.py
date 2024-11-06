@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "INSECURE_KEY")
 DEBUG = int(os.environ.get("DEBUG", default=1))
 
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost','127.0.0.1','api']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost','127.0.0.1','api','csc8567.luxbulb.org',os.environ.get("ALLOWED_HOST", default='csc8567.luxbulb.org')]
 CSRF_TRUSTED_ORIGINS = ['http://0.0.0.0:8080']
 
 # Application definition
