@@ -6,7 +6,7 @@ from django.contrib.auth.views import LoginView
 import requests
 
 def api_get_garages():
-    response = requests.get('http://api:' + os.environ.get('API_PORT', '8001') + '/api/garages/')
+    response = requests.get(os.environ.get('API_HOST', 'http://0.0.0.0:') + os.environ.get('API_PORT', '8001') + '/api/garages/')
     response.raise_for_status()
     garages_data = response.json() 
     choices = [(garage['id'], garage['nom']) for garage in garages_data]

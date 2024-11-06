@@ -14,7 +14,7 @@ from django.core.files.storage import FileSystemStorage
 
 
 def get_profile(userId):
-    response = requests.get('http://api:' + os.environ.get('API_PORT', '8001') + f'/api/profile/{userId}/')
+    response = requests.get(os.environ.get('API_HOST', 'http://0.0.0.0:')  + os.environ.get('API_PORT', '8001') + f'/api/profile/{userId}/')
     response.raise_for_status()
     profile_data = response.json() 
     return profile_data[0]
@@ -42,7 +42,7 @@ def signup(request):
             user = form.save(commit=False)  
             user.set_password(form.cleaned_data['password']) 
             user_data = model_to_dict(user, fields=['id', 'username', 'email','password'])  # Add fields as needed
-            url = 'http://api:'+os.environ.get('API_PORT', '8001')+('/api/users/add/') 
+            url = os.environ.get('API_HOST', 'http://0.0.0.0:')+os.environ.get('API_PORT', '8001')+('/api/users/add/') 
             requests.post(url, json=user_data)
             user = authenticate(username=user.username, password=form.cleaned_data['password'])
             if user is not None:
@@ -63,7 +63,7 @@ def garage(request):
             form_add = GarageAddForm(request.POST or None)
             if form_add.is_valid() :
                 data = {'nom': form_add.cleaned_data['name']}
-                url = 'http://api:'+os.environ.get('API_PORT', '8001')+('/api/garages/add/')
+                url = os.environ.get('API_HOST', 'http://0.0.0.0:')+os.environ.get('API_PORT', '8001')+('/api/garages/add/')
                 requests.post(url, json=data)
                 messages.success(request, "Ajouté avec succès!", extra_tags="form_add")
                 print(messages)
@@ -73,7 +73,7 @@ def garage(request):
             if form_edit.is_valid():
                 data = {'nom': form_edit.cleaned_data['name']}
                 garage = form_edit.cleaned_data['garage']
-                url = 'http://api:'+os.environ.get('API_PORT', '8001')+(f'/api/garages/{garage}/edit/')
+                url = os.environ.get('API_HOST', 'http://0.0.0.0:')+os.environ.get('API_PORT', '8001')+(f'/api/garages/{garage}/edit/')
                 requests.put(url, json=data)
                 messages.success(request, "Modifié avec succès!", extra_tags="form_edit")
 
@@ -81,7 +81,7 @@ def garage(request):
             form_delete = GarageDeleteForm(request.POST or None)
             if form_delete.is_valid() :
                 garage = form_delete.cleaned_data['garage']
-                url = 'http://api:'+os.environ.get('API_PORT', '8001')+(f'/api/garages/{garage}/delete/')
+                url = os.environ.get('API_HOST', 'http://0.0.0.0:')+os.environ.get('API_PORT', '8001')+(f'/api/garages/{garage}/delete/')
                 requests.delete(url)
                 messages.success(request, "Supprimé avec succès!",extra_tags="form_delete")
     
@@ -106,7 +106,7 @@ def voiture(request):
             form_select = VoitureSelectForm(request.POST or None)
             if form_select.is_valid() :
                 garage = form_select.cleaned_data['garage']
-                url = 'http://api:'+os.environ.get('API_PORT', '8001')+(f'/api/voitures/{garage}/')
+                url = os.environ.get('API_HOST', 'http://0.0.0.0:')+os.environ.get('API_PORT', '8001')+(f'/api/voitures/{garage}/')
                 response = requests.get(url)
                 voitures = response.json() 
                 print(voitures)
@@ -118,7 +118,7 @@ def voiture(request):
             if form_add.is_valid() :
                 data = form_add.cleaned_data
                 data["garage"] = data["garage"]
-                url = 'http://api:'+os.environ.get('API_PORT', '8001')+(f'/api/voitures/add/')
+                url = os.environ.get('API_HOST', 'http://0.0.0.0:')+os.environ.get('API_PORT', '8001')+(f'/api/voitures/add/')
                 response = requests.post(url, json=data)
                 messages.success(request, "Ajouté avec succès!", extra_tags="form_add")
 

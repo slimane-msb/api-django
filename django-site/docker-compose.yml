@@ -86,6 +86,7 @@ services:
       - DATABASE_HOST=db
       - DATABASE_PORT=5432
       - ALLOWED_HOST=csc8567.luxbulb.org
+      - API_PORT=8080
     depends_on:
       - db
 
