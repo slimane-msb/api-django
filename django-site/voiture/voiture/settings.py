@@ -27,8 +27,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "INSECURE_KEY")
 DEBUG = int(os.environ.get("DEBUG", default=1))
 
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost','127.0.0.1','api']
-
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost','127.0.0.1','api','csc8567.luxbulb.org',os.environ.get("ALLOWED_HOST", default='csc8567.luxbulb.org')]
+CSRF_TRUSTED_ORIGINS = ['http://0.0.0.0:8080','http://127.0.0.1:8001' ]
 
 # Application definition
 
@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    os.environ.get("RUNNING_CONTAINER"),
-    # 'public',
-    # 'api.apps.ApiConfig'
+    # os.environ.get("RUNNING_CONTAINER"),
+    'public',
+    'api.apps.ApiConfig'
 ]
 
 MIDDLEWARE = [
@@ -133,6 +133,8 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = '/media/'
+
+
 
 
 

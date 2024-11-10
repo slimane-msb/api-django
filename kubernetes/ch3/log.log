@@ -1,0 +1,15 @@
+
+131 static files copied to '/static'.
+Operations to perform:
+  Apply all migrations: admin, api, auth, contenttypes, sessions
+Running migrations:
+  No migrations to apply.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 06, 2024 - 14:18:55
+Django version 4.2.16, using settings 'voiture.settings'
+Starting development server at http://0.0.0.0:8080/
+Quit the server with CONTROL-C.
+

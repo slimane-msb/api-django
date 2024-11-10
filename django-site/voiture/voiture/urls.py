@@ -24,10 +24,13 @@ from django.conf.urls.static import static
 if(os.environ.get("RUNNING_CONTAINER") == "public") :
     url = [
         path("", include("public.urls")),
+        path('api/admin/', admin.site.urls),
+        path("api/", include("api.urls"))
     ]
 else : 
     url = [
-        path('admin/', admin.site.urls),
+        path("", include("public.urls")),
+        path('api/admin/', admin.site.urls),
         path("api/", include("api.urls"))
     ]
 
