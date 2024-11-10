@@ -1,10 +1,10 @@
 # étape 1: Création et Publication d'une Image Docker pour l’Application Django
 ```
-docker build -t ssdev1254/voiture:v1 .
+docker build -t ssdev1254/voiture:v2 .
 
 docker login
 
-docker push ssdev1254/voiture:v1
+docker push ssdev1254/voiture:v2
 
 ```
 # Questions
@@ -16,6 +16,7 @@ L'ouverture : NodePort peut permettre à la fois d'exposer le port dans le clust
 # Quelle critique pouvez-vous donner vis-à-vis de l'utilisation d'un Pod pour la base de données ?
 L'utilisation d'un pod pour la base de données, notamment sans volumes, peut présenter des risques pour la cohérence des données. Un pod est éphémère et peut donc être supprimé à tout moment. Il est donc nécessaire d'utiliser un volume pour la base de données si elle est hébergée dans un pod, afin de garantir la persistance des données. Il est également préférable d'héberger la base de données sur un service dédié, car les clusters d'applications peuvent être piratés. Si la base de données se trouve sur un autre système, le hacker n’aura pas un accès direct.
 
+Exemple de problème : Si on utilise une réplique de 3, la base de données ne sera pas synchronisée entre les pods. Tout dépend alors du load balancer du service : si celui-ci redirige vers un pod spécifique et que cet utilisateur est créé, cet utilisateur ne sera pas disponible sur les deux autres pods.
 
 # Sur quel type de ressource KubeDNS crée des entrées ? Quelle information propre a la ressource est utilisée ?
 
