@@ -1,5 +1,12 @@
 # étape 1: Création et Publication d'une Image Docker pour l’Application Django
+```
+docker build -t ssdev1254/voiture:v1 .
 
+docker login
+
+docker push ssdev1254/voiture:v1
+
+```
 # Questions
 
 # Quelle est la différence entre un service ClusterIP et NodePort ?
@@ -21,6 +28,20 @@ L'information principale utilisée est le nom du service et le nom du namespace.
 
 
 ![Alt text](image.png)
+
+
+# acceder au site en locale 
+```
+monkube proxy
+
+http://127.0.0.1:8001/api/v1/namespaces/u-9nl7s/services/voiture-svc/proxy/
+```
+
+
+
+
+
+
 
 
 ## commandes utiles  
