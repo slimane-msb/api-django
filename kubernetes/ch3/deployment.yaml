@@ -5,7 +5,7 @@ metadata:
   labels:
     app: voiture-dep
 spec:
-  replicas: 1 # 3 replicas of the pod
+  replicas: 1 
   selector:
     matchLabels:
       app: voiture-dep
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: voiture-dep-container
-        image: ssdev1254/voiture:v1
+        image: ssdev1254/voiture:v2
         env:
         - name: RUNNING_CONTAINER
           value: "public"
@@ -32,5 +32,7 @@ spec:
           value: "5432"
         - name: API_PORT
           value: "8080"
+        - name: ALLOWED_HOST
+          value: csc8567.luxbulb.org
         ports:
         - containerPort: 8080
