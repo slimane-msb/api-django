@@ -1,6 +1,29 @@
 # étape 1: Création et Publication d'une Image Docker pour l’Application Django
 
-- test 
+# Questions
+
+# Quelle est la différence entre un service ClusterIP et NodePort ?
+Les deux sont une solution pour la non stabilité des IP des pods, et donc pour permettre d'accéder au pods. La différence entre les deux se base sur : 
+L'ouverture : NodePort peut permettre à la fois d'exposer le port dans le cluster et à l'exterieur du cluster. ClusterIP crée une IP virtuelle et permet uniquement un accés interne. 
+
+# Quelle critique pouvez-vous donner vis-à-vis de l'utilisation d'un Pod pour la base de données ?
+L'utilisation d'un pod pour la base de données, notamment sans volumes, peut présenter des risques pour la cohérence des données. Un pod est éphémère et peut donc être supprimé à tout moment. Il est donc nécessaire d'utiliser un volume pour la base de données si elle est hébergée dans un pod, afin de garantir la persistance des données. Il est également préférable d'héberger la base de données sur un service dédié, car les clusters d'applications peuvent être piratés. Si la base de données se trouve sur un autre système, le hacker n’aura pas un accès direct.
+
+
+# Sur quel type de ressource KubeDNS crée des entrées ? Quelle information propre a la ressource est utilisée ?
+
+KubeDNS qui est en charge de créer des entrées DNS dans kubernetes, s'occupe de la mise en place des entrées pour les ressources du type Service principalement que ce soit simple ou headless, il peut le faire pour d'autres ressources mais c'est pas une bonne pratique
+
+
+L'information principale utilisée est le nom du service et le nom du namespace. Kubernetes s'occupe de la résolution de l'adresse IP du service à partir de son nom. Ensuite, c'est le service qui redirige vers les pods en utilisant les labels des pods. Pour les services headless, ce sont les labels qui sont utilisés pour pointer directement vers les pods.
+
+# Le schéma !
+
+
+![Alt text](image.png)
+
+
+## commandes utiles  
 ```
 docker compose up --build
 
@@ -61,17 +84,3 @@ monkube get pods
 monkube logs deployments/voiture-dep > log.log
 
 ```
-# Questions
-
-# Quelle est la différence entre un service ClusterIP et NodePort ?
-Les deux sont une solution pour la non stabilité des IP des pods, et donc pour permettre d'accéder au pods. La différence entre les deux se base sur : 
-L'ouverture : NodePort peut permettre à la fois d'exposer le port dans le cluster et à l'exterieur du cluster. ClusterIP crée une IP virtuelle et permet uniquement un accés interne. 
-
-# Quelle critique pouvez-vous donner vis-à-vis de l'utilisation d'un Pod pour la base de données ?
-
-
-
-# Sur quel type de ressource KubeDNS crée des entrées ? Quelle information propre a la ressource est utilisée ?
-
-
-# Le schéma !
