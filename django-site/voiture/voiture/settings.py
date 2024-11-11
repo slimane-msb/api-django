@@ -28,7 +28,7 @@ DEBUG = int(os.environ.get("DEBUG", default=1))
 
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost','127.0.0.1','api','csc8567.luxbulb.org',os.environ.get("ALLOWED_HOST", default='csc8567.luxbulb.org')]
-CSRF_TRUSTED_ORIGINS = ['http://0.0.0.0:8080','http://127.0.0.1:8001' ]
+CSRF_TRUSTED_ORIGINS = ['http://0.0.0.0:8080','http://127.0.0.1:8001',os.environ.get("CSRF_TRUSTED_ORIGINS", default='http://127.0.0.1:8001') ]
 
 # Application definition
 

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: voiture-dep-container
-        image: ssdev1254/voiture:v2
+        image: ssdev1254/voiture:v3
         env:
         - name: RUNNING_CONTAINER
           value: "public"
@@ -33,6 +33,8 @@ spec:
         - name: API_PORT
           value: "8080"
         - name: ALLOWED_HOST
-          value: csc8567.luxbulb.org
+          value: django.aayyss.csc8567.luxbulb.org
+        - name: CSRF_TRUSTED_ORIGINS
+          value: https://django.aayyss.csc8567.luxbulb.org
         ports:
         - containerPort: 8080
