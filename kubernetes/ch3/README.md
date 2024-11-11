@@ -1,10 +1,10 @@
 # étape 1: Création et Publication d'une Image Docker pour l’Application Django
 ```
-docker build -t ssdev1254/voiture:v2 .
+docker build -t ssdev1254/voiture:v3 .
 
 docker login
 
-docker push ssdev1254/voiture:v2
+docker push ssdev1254/voiture:v3
 
 ```
 # Questions
