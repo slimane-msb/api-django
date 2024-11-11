@@ -33,6 +33,6 @@ spec:
         - name: API_PORT
           value: "8080"
         - name: ALLOWED_HOST
-          value: csc8567.luxbulb.org
+          value: django.aayyss.csc8567.luxbulb.org
         ports:
         - containerPort: 8080

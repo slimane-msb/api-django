@@ -17,8 +17,8 @@ spec:
               service:
                 name: voiture-svc
                 port:
-                  number: 80S
+                  number: 8080
   tls:
     - hosts:
         - django.aayyss.csc8567.luxbulb.org
-      secretName: secret  # Assurez-vous que ce secret existe dans le même namespace
+      secretName: secret  
