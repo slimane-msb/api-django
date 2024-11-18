@@ -73,12 +73,6 @@ monkube apply -f service.yaml
 
 
 ```
-docker build -t yzriga/todo_list_project:v1 .
-
-docker login
-
-docker push yzriga/todo_list_project:v1
-
 
 docker build -t yzriga/voiture:v1 .
 
