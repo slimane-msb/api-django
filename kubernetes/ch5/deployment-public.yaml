@@ -5,7 +5,7 @@ metadata:
   labels:
     app: voiture-dep
 spec:
-  replicas: 1  # a changer a 3 
+  replicas: 3
   selector:
     matchLabels:
       app: voiture-dep
