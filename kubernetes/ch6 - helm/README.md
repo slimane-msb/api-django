@@ -20,7 +20,7 @@ helm upgrade django-test djangohelm/ --namespace u-9nl7s --values ./djangohelm/v
 
 # test 
 
-helm template django-test djangohelm/ --namespace u-9nl7s --values ./djangohelm/values.yaml
+helm template django-test djangohelm/ --namespace u-9nl7s --values ./djangohelm/values.yaml >> test.yaml
 
 # Vider mon namespace
 monkube delete all --all -n u-9nl7s
