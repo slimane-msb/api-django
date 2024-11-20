@@ -1,4 +1,4 @@
-{{- range .Values.deployment }}
+{{- range .Values.statefulSet }}
 ---
 apiVersion: v1
 kind: ConfigMap

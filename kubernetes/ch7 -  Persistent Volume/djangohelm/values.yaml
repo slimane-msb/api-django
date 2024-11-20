@@ -70,7 +70,7 @@ statefulSet:
     volumeClaim: 
       name: db-data
       storage: 0.1Gi
-      mountPath: /var/lib/postgresql/data
+      mountPath: /data
     containers: 
       name: my-container
       image: postgres:16
@@ -79,6 +79,7 @@ statefulSet:
         POSTGRES_DB: "voiture"
         POSTGRES_USER: "yahia"
         POSTGRES_PASSWORD: "yahia"
+        PGDATA: "/data/pgdata"
               
 
 secret:
