@@ -1,14 +1,14 @@
 # Objectif 
 - Deux images pour API et Public 
 - Services pour API et Public et BDD 
-- Ngress à la place de Ngnix comme dans le ch4
+- Ingress à la place de Ngnix comme dans le ch4
 
 ```
 
 monkube apply -f deployment-api.yaml
 monkube apply -f deployment-public.yaml
 monkube apply -f service-api.yaml
-# pour le service de Public et le ngress c'est le meme 
+# pour le service de Public et le ingress c'est le meme 
 
 ```
 
