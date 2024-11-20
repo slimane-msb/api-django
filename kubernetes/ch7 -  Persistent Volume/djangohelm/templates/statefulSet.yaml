@@ -1,0 +1,45 @@
+{{- range .Values.statefulSet }}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .name }}
+  labels:
+    app: {{ .label }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .label }}
+  template:
+    metadata:
+      labels:
+        app: {{ .label }}
+    spec:
+      containers:
+      - name: {{ .containers.name }}
+        image: {{ .containers.image }}
+        resources:
+          requests:
+            memory: "100Mi" 
+            cpu: "100m"      
+          limits:
+            memory: "200Mi"
+            cpu: "200m"
+        envFrom:
+        - configMapRef:
+            name: {{ .name }}-config
+        ports:
+        - containerPort: {{ .containers.port }}
+        volumeMounts:
+        - name: {{ .volumeClaim.name }}
+          mountPath: {{ .volumeClaim.mountPath }}
+  volumeClaimTemplates:
+  - metadata:
+      name: {{ .volumeClaim.name }}
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: {{ .volumeClaim.storage }} 
+{{- end }}
