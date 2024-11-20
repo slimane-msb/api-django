@@ -69,26 +69,26 @@ spec:
             memory: "200Mi"
             cpu: "200m"
         env:
-          - name: RUNNING_CONTAINER
-            value: "public"
-          - name: POSTGRES_DB
-            value: "voiture"
-          - name: POSTGRES_USER
-            value: "yahia"
-          - name: POSTGRES_PASSWORD
-            value: "yahia"
-          - name: DATABASE_HOST
-            value: "db"
-          - name: DATABASE_PORT
-            value: 5432
-          - name: API_PORT
-            value: 8080
-          - name: API_HOST
-            value: "http://voiture-api-svc:"
-          - name: ALLOWED_HOST
-            value: "django.aayyss.csc8567.luxbulb.org"
-          - name: CSRF_TRUSTED_ORIGINS
-            value: "https://django.aayyss.csc8567.luxbulb.org"
+        - name: RUNNING_CONTAINER 
+          value: "public"
+        - name: POSTGRES_DB 
+          value: "voiture"
+        - name: POSTGRES_USER 
+          value: "yahia"
+        - name: POSTGRES_PASSWORD 
+          value: "yahia"
+        - name: DATABASE_HOST 
+          value: "db"
+        - name: DATABASE_PORT 
+          value: "5432"
+        - name: API_PORT 
+          value: "8080"
+        - name: API_HOST 
+          value: "http://voiture-api-svc:"
+        - name: ALLOWED_HOST 
+          value: "django.aayyss.csc8567.luxbulb.org"
+        - name: CSRF_TRUSTED_ORIGINS 
+          value: "https://django.aayyss.csc8567.luxbulb.org"
         ports:
         - containerPort: 8080
 ---
@@ -120,22 +120,22 @@ spec:
             memory: "200Mi"
             cpu: "200m"
         env:
-          - name: RUNNING_CONTAINER
-            value: "api"
-          - name: POSTGRES_DB
-            value: "voiture"
-          - name: POSTGRES_USER
-            value: "yahia"
-          - name: POSTGRES_PASSWORD
-            value: "yahia"
-          - name: DATABASE_HOST
-            value: "db"
-          - name: DATABASE_PORT
-            value: 5432
-          - name: ALLOWED_HOST
-            value: "voiture-api-svc"
-          - name: CSRF_TRUSTED_ORIGINS
-            value: "https://django.aayyss.csc8567.luxbulb.org"
+        - name: RUNNING_CONTAINER 
+          value: "api"
+        - name: POSTGRES_DB 
+          value: "voiture"
+        - name: POSTGRES_USER 
+          value: "yahia"
+        - name: POSTGRES_PASSWORD 
+          value: "yahia"
+        - name: DATABASE_HOST 
+          value: "db"
+        - name: DATABASE_PORT 
+          value: "5432"
+        - name: ALLOWED_HOST 
+          value: "voiture-api-svc"
+        - name: CSRF_TRUSTED_ORIGINS 
+          value: "https://django.aayyss.csc8567.luxbulb.org"
         ports:
         - containerPort: 8080
 ---
@@ -145,16 +145,16 @@ kind: Deployment
 metadata:
   name: ma-db
   labels:
-    app: ma-db
+    app: maDb
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ma-db
+      app: maDb
   template:
     metadata:
       labels:
-        app: ma-db
+        app: maDb
     spec:
       containers:
       - name: my-container
@@ -167,12 +167,12 @@ spec:
             memory: "200Mi"
             cpu: "200m"
         env:
-          - name: POSTGRES_DB
-            value: "voiture"
-          - name: POSTGRES_USER
-            value: "yahia"
-          - name: POSTGRES_PASSWORD
-            value: "yahia"
+        - name: POSTGRES_DB 
+          value: "voiture"
+        - name: POSTGRES_USER 
+          value: "yahia"
+        - name: POSTGRES_PASSWORD 
+          value: "yahia"
         ports:
         - containerPort: 5432
 ---

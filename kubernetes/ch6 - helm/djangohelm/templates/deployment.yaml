@@ -29,12 +29,8 @@ spec:
         env:
         {{- range .containers.env }}
         - name: {{ .name }} 
-          {{- if .value | typeIs "string" }}
           value: "{{ .value }}"
-          {{- else }}
-          value: {{ .value }}
-          {{- end }}
-          {{- end }}
+        {{- end }}
         ports:
         - containerPort: {{ .containers.port }}
 {{- end }}
