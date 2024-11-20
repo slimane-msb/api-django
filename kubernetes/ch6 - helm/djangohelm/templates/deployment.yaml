@@ -26,11 +26,9 @@ spec:
           limits:
             memory: "200Mi"
             cpu: "200m"
-        env:
-        {{- range .containers.env }}
-        - name: {{ .name }} 
-          value: "{{ .value }}"
-        {{- end }}
+        envFrom:
+        - configMapRef:
+            name: {{ .name }}-config
         ports:
         - containerPort: {{ .containers.port }}
 {{- end }}

@@ -32,26 +32,17 @@ deployment:
       image: ssdev1254/voiture:v4
       port: 8080
       env:
-        - name: RUNNING_CONTAINER
-          value: "public"
-        - name: POSTGRES_DB
-          value: "voiture"
-        - name: POSTGRES_USER
-          value: "yahia"
-        - name: POSTGRES_PASSWORD
-          value: "yahia"
-        - name: DATABASE_HOST
-          value: "db"
-        - name: DATABASE_PORT
-          value: "5432"
-        - name: API_PORT
-          value: "8080"
-        - name: API_HOST
-          value: "http://voiture-api-svc:"  # Note: changed from localhost
-        - name: ALLOWED_HOST
-          value: django.aayyss.csc8567.luxbulb.org
-        - name: CSRF_TRUSTED_ORIGINS
-          value: https://django.aayyss.csc8567.luxbulb.org
+        RUNNING_CONTAINER: "public"
+        POSTGRES_DB: "voiture"
+        POSTGRES_USER: "yahia"
+        POSTGRES_PASSWORD: "yahia"
+        DATABASE_HOST: "db"
+        DATABASE_PORT: "5432"
+        API_PORT: "8080"
+        API_HOST: "http://voiture-api-svc:"
+        ALLOWED_HOST: "django.aayyss.csc8567.luxbulb.org"
+        CSRF_TRUSTED_ORIGINS: "https://django.aayyss.csc8567.luxbulb.org"
+
   - name: voiture-api
     label: voiture-api
     replicas: 1
@@ -60,22 +51,15 @@ deployment:
       image: ssdev1254/voiture:v4
       port: 8080
       env:
-        - name: RUNNING_CONTAINER
-          value: "api"
-        - name: POSTGRES_DB
-          value: "voiture"
-        - name: POSTGRES_USER
-          value: "yahia"
-        - name: POSTGRES_PASSWORD
-          value: "yahia"
-        - name: DATABASE_HOST
-          value: "db"
-        - name: DATABASE_PORT
-          value: "5432"
-        - name: ALLOWED_HOST
-          value: voiture-api-svc # django.aayyss.csc8567.luxbulb.org si on souhaite exposer l'api a l'exterieur
-        - name: CSRF_TRUSTED_ORIGINS
-          value: https://django.aayyss.csc8567.luxbulb.org
+        RUNNING_CONTAINER: "api"
+        POSTGRES_DB: "voiture"
+        POSTGRES_USER: "yahia"
+        POSTGRES_PASSWORD: "yahia"
+        DATABASE_HOST: "db"
+        DATABASE_PORT: "5432"
+        ALLOWED_HOST: "voiture-api-svc" # django.aayyss.csc8567.luxbulb.org si on souhaite exposer l'api a l'exterieur
+        CSRF_TRUSTED_ORIGINS: "https://django.aayyss.csc8567.luxbulb.org"
+
   - name: ma-db
     label: maDb
     replicas: 1
@@ -84,13 +68,10 @@ deployment:
       image: postgres:16
       port: 5432
       env:
-        - name: POSTGRES_DB
-          value: "voiture"
-        - name: POSTGRES_USER
-          value: "yahia"
-        - name: POSTGRES_PASSWORD
-          value: "yahia"          
-
+        POSTGRES_DB: "voiture"
+        POSTGRES_USER: "yahia"
+        POSTGRES_PASSWORD: "yahia"
+              
 
 secret:
   name: secret
