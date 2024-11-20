@@ -1,0 +1,19 @@
+{{- range .Values.services }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .serviceName }}
+spec:
+  {{- if .headless }}
+  clusterIP: None
+  {{- else }}
+  type: {{ .type }}
+  {{- end }}
+  selector:
+    app: {{ .serviceSelector }}
+  ports:
+    - protocol: TCP
+      port: {{ .port }}
+      targetPort: {{ .targetPort }} 
+{{- end }}
