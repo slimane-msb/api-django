@@ -1,0 +1,40 @@
+{{- range .Values.deployment }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .name }}
+  labels:
+    app: {{ .label }}
+spec:
+  replicas: {{ .replicas }}
+  selector:
+    matchLabels:
+      app: {{ .label }}
+  template:
+    metadata:
+      labels:
+        app: {{ .label }}
+    spec:
+      containers:
+      - name: {{ .containers.name }}
+        image: {{ .containers.image }}
+        resources:
+          requests:
+            memory: "100Mi" 
+            cpu: "100m"      
+          limits:
+            memory: "200Mi"
+            cpu: "200m"
+        env:
+        {{- range .containers.env }}
+        - name: {{ .name }} 
+          {{- if .value | typeIs "string" }}
+          value: "{{ .value }}"
+          {{- else }}
+          value: {{ .value }}
+          {{- end }}
+          {{- end }}
+        ports:
+        - containerPort: {{ .containers.port }}
+{{- end }}

@@ -13,7 +13,8 @@ COPY . ./
 ENV PYTHONUNBUFFERED=1
 
 
-CMD python voiture/manage.py collectstatic --noinput && \
+CMD sleep 10 && \
+    python voiture/manage.py collectstatic --noinput && \
     python voiture/manage.py migrate && \
     # python voiture/manage.py createsuperuser \
     #     --email "admin@admin.admin" --username "admin" --noinput && \

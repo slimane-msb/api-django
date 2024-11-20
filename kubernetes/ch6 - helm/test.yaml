@@ -1,0 +1,203 @@
+---
+# Source: djangohelm/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: voiture-api-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: voiture-api
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+# Source: djangohelm/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+spec:
+  type: ClusterIP
+  selector:
+    app: maDb
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+---
+# Source: djangohelm/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: voiture-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: voiture-dep
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+# Source: djangohelm/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: voiture-dep
+  labels:
+    app: voiture-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: voiture-dep
+  template:
+    metadata:
+      labels:
+        app: voiture-dep
+    spec:
+      containers:
+      - name: voiture-dep-container
+        image: ssdev1254/voiture:v4
+        resources:
+          requests:
+            memory: "100Mi" 
+            cpu: "100m"      
+          limits:
+            memory: "200Mi"
+            cpu: "200m"
+        env:
+          - name: RUNNING_CONTAINER
+            value: "public"
+          - name: POSTGRES_DB
+            value: "voiture"
+          - name: POSTGRES_USER
+            value: "yahia"
+          - name: POSTGRES_PASSWORD
+            value: "yahia"
+          - name: DATABASE_HOST
+            value: "db"
+          - name: DATABASE_PORT
+            value: 5432
+          - name: API_PORT
+            value: 8080
+          - name: API_HOST
+            value: "http://voiture-api-svc:"
+          - name: ALLOWED_HOST
+            value: "django.aayyss.csc8567.luxbulb.org"
+          - name: CSRF_TRUSTED_ORIGINS
+            value: "https://django.aayyss.csc8567.luxbulb.org"
+        ports:
+        - containerPort: 8080
+---
+# Source: djangohelm/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: voiture-api
+  labels:
+    app: voiture-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: voiture-api
+  template:
+    metadata:
+      labels:
+        app: voiture-api
+    spec:
+      containers:
+      - name: voiture-api-container
+        image: ssdev1254/voiture:v4
+        resources:
+          requests:
+            memory: "100Mi" 
+            cpu: "100m"      
+          limits:
+            memory: "200Mi"
+            cpu: "200m"
+        env:
+          - name: RUNNING_CONTAINER
+            value: "api"
+          - name: POSTGRES_DB
+            value: "voiture"
+          - name: POSTGRES_USER
+            value: "yahia"
+          - name: POSTGRES_PASSWORD
+            value: "yahia"
+          - name: DATABASE_HOST
+            value: "db"
+          - name: DATABASE_PORT
+            value: 5432
+          - name: ALLOWED_HOST
+            value: "voiture-api-svc"
+          - name: CSRF_TRUSTED_ORIGINS
+            value: "https://django.aayyss.csc8567.luxbulb.org"
+        ports:
+        - containerPort: 8080
+---
+# Source: djangohelm/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ma-db
+  labels:
+    app: ma-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ma-db
+  template:
+    metadata:
+      labels:
+        app: ma-db
+    spec:
+      containers:
+      - name: my-container
+        image: postgres:16
+        resources:
+          requests:
+            memory: "100Mi" 
+            cpu: "100m"      
+          limits:
+            memory: "200Mi"
+            cpu: "200m"
+        env:
+          - name: POSTGRES_DB
+            value: "voiture"
+          - name: POSTGRES_USER
+            value: "yahia"
+          - name: POSTGRES_PASSWORD
+            value: "yahia"
+        ports:
+        - containerPort: 5432
+---
+# Source: djangohelm/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-ingress
+  namespace: u-9nl7s
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: django.aayyss.csc8567.luxbulb.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: voiture-svc
+                port:
+                  number: 8080
+  tls:
+    - hosts:
+        - django.aayyss.csc8567.luxbulb.org
+      secretName: secret
